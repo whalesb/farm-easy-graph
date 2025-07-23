@@ -96,5 +96,5 @@ st.bar_chart(
 )
 
 # Wait and auto-refresh
-time.sleep(10)
+time.sleep(180)
 st.rerun()
