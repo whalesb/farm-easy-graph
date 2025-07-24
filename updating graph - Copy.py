@@ -1,3 +1,4 @@
+
 import streamlit as st
 import pandas as pd
 import json
@@ -15,7 +16,7 @@ def load_data():
     return pd.read_csv("Crop Data Set.csv")
 
 # 🔁 Load inputs from JSON
-@st.cache_data
+
 def load_inputs():
     with open("inputs.json", "r") as f:
         return json.load(f)
