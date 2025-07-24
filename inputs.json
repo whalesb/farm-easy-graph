@@ -1,9 +1,9 @@
 {
   "Nitrogen": 40,
-  "Phosphorus": 40,
+  "Phosphorus": 70,
   "Potassium": 38,
   "Temperature": 25.0,
   "Humidity": 70.0,
   "Soil_pH": 6.5,
-  "Soil_Moisture": 60.0
+  "Soil_Moisture": 80.0
 }
