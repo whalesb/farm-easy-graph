@@ -7,7 +7,7 @@ from sklearn.preprocessing import LabelEncoder
 from streamlit_autorefresh import st_autorefresh
 
 # 🔁 Auto-refresh every 3 minutes (180,000 ms)
-st_autorefresh(interval=10, key="refresh")
+st_autorefresh(interval=100000, key="refresh")
 
 # 🧠 Cache the dataset
 @st.cache_data
