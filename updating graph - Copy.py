@@ -79,19 +79,9 @@ if out_of_scope:
 
 # 📊 Show predictions
 
-import matplotlib.pyplot as plt
-
-# … after computing `predictions` …
-
-# Prepare DataFrame
-chart_df = pd.DataFrame(predictions, columns=["Crop", "Predicted Yield"]).set_index("Crop")
-
-# Create a matplotlib bar plot
-fig, ax = plt.subplots()
-chart_df.plot.bar(ax=ax)
-ax.set_ylabel("Predicted Yield")
-ax.set_xlabel("Crop")
-ax.set_title("Crop Yield Predictions")
+st.bar_chart(
+    pd.DataFrame(yield_predictions, columns=["Crop", "Predicted Yield (tons/ha)"])
+      .set_index("Crop"))
 
 #Render it in Streamlit
 st.pyplot(fig)
