@@ -1,8 +1,9 @@
 {
-  "Nitrogen": 77,
+  "Crop": "Maize",
+  "Nitrogen": 60,
   "Phosphorus": 40,
   "Potassium": 38,
-  "Temperature": 20.0,
+  "Temperature": 30,
   "Humidity": 20.0,
   "Soil_pH": 6.5,
   "Soil_Moisture": 60.0

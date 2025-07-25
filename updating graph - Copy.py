@@ -7,7 +7,7 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.preprocessing import LabelEncoder
 from streamlit_autorefresh import st_autorefresh
 
-# 🔁 Auto-refresh every 3 minutes (180,000 ms)
+# 🔁 Auto-refresh every interval minutes (180,000 ms)
 st_autorefresh(interval=10000, key="refresh")
 
 # 🧠 Cache the dataset
