@@ -91,34 +91,23 @@ def plot_yield_chart(crop):
         # Drop invalid dates
         df = df.dropna(subset=["Timestamp"])
 
-        # Set full monthly range from Jan of earliest year to current month
-        df = df.sort_values("Timestamp")
-        start = df["Timestamp"].min().replace(day=1)
-        end = pd.Timestamp.now().replace(day=1)
-
-        # Create full monthly range
-        full_months = pd.date_range(start=start, end=end, freq='MS')  # MS = Month Start
-        full_month_df = pd.DataFrame({"Timestamp": full_months})
-        full_month_df["Month"] = full_month_df["Timestamp"].dt.strftime("%b %Y")
-
-        # Format data for plotting
-        df["Month"] = df["Timestamp"].dt.strftime("%b %Y")
-        df = df.groupby("Month")["Predicted_Yield"].mean().reset_index()
-
-        # Merge with full range to fill missing months
-        chart_data = pd.merge(full_month_df, df, on="Month", how="left")
-
-        chart = alt.Chart(chart_data).mark_line(point=True).encode(
-            x=alt.X('Month:N', sort=list(chart_data["Month"]), title="Month"),
+        # Keep daily resolution but label by month
+        chart = alt.Chart(df).mark_line(interpolate='linear').encode(
+            x=alt.X(
+                'Timestamp:T',
+                axis=alt.Axis(format='%b %Y', labelAngle=-45, title="Month")
+            ),
             y=alt.Y('Predicted_Yield:Q', title='Yield (kg/ha)'),
-            tooltip=["Month", "Predicted_Yield"]
-        ).properties(
-            #title=f"📈 Yield Trend for {crop}",
-            width=700,
-            height=400
+            tooltip=[alt.Tooltip('Timestamp:T', title='Date'), 'Predicted_Yield']
         )
 
-        st.altair_chart(chart, use_container_width=True)
+        points = alt.Chart(df).mark_point(size=60, filled=True).encode(
+            x='Timestamp:T',
+            y='Predicted_Yield:Q',
+            tooltip=[alt.Tooltip('Timestamp:T', title='Date'), 'Predicted_Yield']
+        )
+
+        st.altair_chart((chart + points).properties(width=700, height=400), use_container_width=True)
 
     except FileNotFoundError:
         st.warning("⚠️ Yield log file not found. Run a few predictions to generate it.")
